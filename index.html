@@ -40,6 +40,8 @@
     <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
     <!-- Supabase JS (plan gratuito): expone self.supabase.createClient -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.8/dist/umd/supabase.js"></script>
+    <script type="text/babel" src="src/core/constants.jsx"></script>
+    <script type="text/babel" src="src/core/helpers.jsx"></script>
 
     <style>
         html {
@@ -1285,12 +1287,6 @@
             };
         };
 
-        const MULLER_READING_FONT_STORAGE = 'muller_reading_font_px_v1';
-        const MULLER_READING_FONT_MIN = 14;
-        const MULLER_READING_FONT_MAX = 34;
-        const MULLER_READING_FONT_STEP = 1;
-        const MULLER_MIC_PERMISSION_PREF_KEY = 'muller_auto_request_mic_v1';
-        const mullerClamp = (n, min, max) => Math.max(min, Math.min(max, n));
         const mullerNormalizeGermanWordToken = (raw) => String(raw || '')
             .toLowerCase()
             .replace(/^[^a-zäöüß]+|[^a-zäöüß]+$/gi, '')
