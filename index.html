@@ -48,6 +48,7 @@
     <script type="text/babel" src="src/features/ruta/ruta-core.jsx"></script>
     <script type="text/babel" src="src/features/vocab-lexikon/vocab-srs.jsx"></script>
     <script type="text/babel" src="src/legacy/distance.jsx"></script>
+    <script type="text/babel" src="src/ui/icon.jsx"></script>
 
     <style>
         html {
@@ -517,12 +518,6 @@
         window.MULLER_CREATOR_EMAIL = window.MULLER_CREATOR_EMAIL || 'djplaza1@gmail.com';
         window.MULLER_REWARDED_AD_URL = window.MULLER_REWARDED_AD_URL || '';
         window.MULLER_PREMIUM_CHECKOUT_URL = window.MULLER_PREMIUM_CHECKOUT_URL || '';
-
-        // --- COMPONENTE AISLANTE DE ICONOS (Lucide + contenedor “premium” opcional) ---
-        const Icon = ({ name, className, nav = false }) => {
-            const inner = <span className="lucide-wrapper" dangerouslySetInnerHTML={{ __html: `<i data-lucide="${name}" class="${className || ''}"></i>` }} />;
-            return nav ? <span className="nav-tab-icon">{inner}</span> : inner;
-        };
 
         // --- BASES DE DATOS Y CONFIGURACIÓN INICIAL (sin cambios) ---
         const DEFAULT_GUION = [
