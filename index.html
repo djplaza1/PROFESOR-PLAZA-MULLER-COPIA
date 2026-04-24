@@ -45,6 +45,7 @@
     <script type="text/babel" src="src/core/helpers.jsx"></script>
     <script type="text/babel" src="src/features/pdf/pdf-core.jsx"></script>
     <script type="text/babel" src="src/features/escritura/telc-core.jsx"></script>
+    <script type="text/babel" src="src/features/escritura/writing-drills.jsx"></script>
     <script type="text/babel" src="src/features/lectura/reading-core.jsx"></script>
     <script type="text/babel" src="src/features/ruta/ruta-core.jsx"></script>
     <script type="text/babel" src="src/features/vocab-lexikon/vocab-srs.jsx"></script>
@@ -1066,12 +1067,6 @@
                 checklist: ['Introducción referida al tema', 'Opinión explícita', '2 argumentos conectados', 'Conclusión clara']
             }
         ];
-        const LETTER_DRILLS = [
-            { title: "Umlaute Ä Ö Ü und ß", sample: "Äpfel · Öl · Über · Straße", practice: "Äpfel Öl Über Straße" },
-            { title: "Alltag", sample: "schön · müde · hören · groß", practice: "Schön müde hören groß" },
-            { title: "Satzanfang", sample: "Großschreibung: Ich, Du, Der, Die", practice: "Ich lerne Deutsch jeden Tag." }
-        ];
-
         /** Quita repeticiones consecutivas de la misma palabra (STT móvil suele duplicar 5–20 veces). */
         const dedupeConsecutiveWords = (s) => {
             if (!s || typeof s !== 'string') return '';
