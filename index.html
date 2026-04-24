@@ -41,6 +41,7 @@
     <!-- Supabase JS (plan gratuito): expone self.supabase.createClient -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.8/dist/umd/supabase.js"></script>
     <script type="text/babel" src="src/core/constants.jsx"></script>
+    <script type="text/babel" src="src/core/config.jsx"></script>
     <script type="text/babel" src="src/core/helpers.jsx"></script>
     <script type="text/babel" src="src/features/pdf/pdf-core.jsx"></script>
     <script type="text/babel" src="src/features/escritura/telc-core.jsx"></script>
@@ -477,13 +478,6 @@
 
     <script type="text/babel">
         const { useState, useEffect, useLayoutEffect, useRef, useCallback, useMemo } = React;
-
-        /** Supabase (gratis): Dashboard → Project Settings → API → Project URL y anon public key */
-        window.MULLER_SUPABASE_URL = window.MULLER_SUPABASE_URL || 'https://mrimappoycvfujzegxdt.supabase.co';
-        window.MULLER_SUPABASE_ANON_KEY = window.MULLER_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1yaW1hcHBveWN2ZnVqemVneGR0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY2MzI1MDMsImV4cCI6MjA5MjIwODUwM30.L_5Lk3S_TgiaSe8jAAhTcQTbUsQiTjxA9pWq0ZDayBY';
-        window.MULLER_CREATOR_EMAIL = window.MULLER_CREATOR_EMAIL || 'djplaza1@gmail.com';
-        window.MULLER_REWARDED_AD_URL = window.MULLER_REWARDED_AD_URL || '';
-        window.MULLER_PREMIUM_CHECKOUT_URL = window.MULLER_PREMIUM_CHECKOUT_URL || '';
 
         // --- BASES DE DATOS Y CONFIGURACIÓN INICIAL (sin cambios) ---
         const DEFAULT_GUION = [
