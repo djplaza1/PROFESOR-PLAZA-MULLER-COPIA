@@ -1252,7 +1252,7 @@
             bx_conectores: { title: 'B1/B2 — conectores', what: 'Conectores lógicos para escritura oral y Redemittel.', tips: ['Clasifica: oposición, causa, consecuencia, tiempo.', 'Escribe un minipárrafo usando solo conectores nuevos.', 'Úsalos en Historia al improvisar respuestas.'] },
             bx_redemittel: { title: 'B1/B2 — Redemittel', what: 'Fórmulas listas para examen oral/escrito.', tips: ['Aprende de memoria 5 por semana.', 'Dílas en voz alta con buena entonación.', 'Inserta una por respuesta en simulación oral.'] },
             progreso_dashboard: { title: 'Progreso — panel', what: 'Ves racha, monedas, mazos y exportaciones; el bloque de Entrenamiento resume práctica avanzada si lo usas.', tips: ['Haz PDF antes de vacaciones para no perder la foto.', 'Revisa mazos difícil cada pocos días.', 'Combina con backup JSON flotante para copia total.'] },
-            guiones_import: { title: 'Biblioteca — guiones', what: 'Pegas texto de la IA con título y lo guardas; al cargarlo se vuelve tu Historia activa.', tips: ['Comprueba títulos para encontrar lecciones rápido.', 'Borra versiones viejas para no confundirte.', 'El prompt sugerido está arriba: cópialo tal cual a ChatGPT/Gemini.'] },
+            guiones_import: { title: 'Biblioteca — guiones', what: 'Pegas texto de la IA con título y lo guardas; al cargarlo se vuelve tu Historia activa.', tips: ['Comprueba títulos para encontrar lecciones rápido.', 'Borra versiones viejas para no confundirte.', 'El prompt sugerido está arriba: cópialo tal cual a tu IA favorita.'] },
             guiones_vocab_custom: { title: 'Biblioteca — vocabulario propio', what: 'Pegas listas “alemán — español” y guardas lecciones; luego Practicar o mezcla.', tips: ['Una línea por palabra facilita el parseo.', 'Mezcla varias lecciones para simular examen amplio.', 'Exporta a Anki desde Progreso si usas mazos allí.'] },
             guiones_bx_distrib: { title: 'Biblioteca → B1 / B2 (subpestañas)', what: 'Desde un texto pegado se extraen frases y se clasifican por tipo (vocabulario, verbos, etc.); cada frase se coloca en B1 o B2 según reglas locales o en un solo nivel si lo fuerzas.', tips: ['Si tenías un guion guardado cargado en Historia al pulsar Distribuir, esas tarjetas quedan vinculadas: al borrar ese guion puedes quitar también esas entradas en B1/B2.', 'El nivel automático es una estimación: revisa en B1/B2 y mueve o borra tarjetas con “Tu biblioteca”.', 'Frases antiguas sin vincular: usa “Borrar mis aportaciones” o borra tarjeta a tarjeta. El archivo b1-b2-database.json del proyecto no se borra desde aquí.'] },
             guiones_mix: { title: 'Mezclar lecciones de vocabulario', what: 'Seleccionas varias lecciones guardadas y generas una sesión única en la pestaña Vocab.', tips: ['Marca al menos dos lecciones si quieres variedad.', 'Las tarjetas difíciles se suelen repetir al final.', 'Úsalo antes de un examen para repaso amplio.'] },
@@ -1263,8 +1263,8 @@
             nav_ruta: { title: 'Ruta A0 → C1', what: 'Camino guiado desde cero real: lecciones con frases, huecos, lectura en voz alta y recompensas. Pestaña Gramática resume reglas por nivel. Test de nivel sugiere por dónde empezar.', tips: ['Tecla R para abrir Ruta.', 'Elige mentor (voz) arriba: Frau Lena, Herr Tom o Lina.', 'Cada 3 lecciones completadas hay bonus extra de monedas.', 'El contenido se ampliará por niveles hasta C1.'] },
             ruta_gramatica: { title: 'Ruta — Gramática', what: 'Resumen por niveles (A1, A2, B1) con explicaciones claras. No sustituye un libro de texto: combínalo con Historia y ejercicios.', tips: ['Abre el bloque del nivel que estudies en el camino.', 'Copia un ejemplo a Escritura para fijarlo.', 'Si algo no cuadra, pregunta a tu tutor o al foro.'] },
             nav_inicio: { title: 'Inicio', what: 'Pantalla principal con accesos rápidos y pendientes de repaso (SRS). Desde aquí saltas a Historia, vocab, shadowing, etc.', tips: ['Tecla I para volver al Inicio.', 'El número en Vocab indica tarjetas prioritarias del SRS.', 'Tras la bienvenida (banderas), eliges qué practicar.'] },
-            hub_centro: { title: 'Centro Müller', what: 'Voces del sistema, ayuda, IA Chrome local; el plan del día y el resumen rápido están en Progreso.', tips: ['Configura voces antes de sesiones largas.', 'Pestaña “IA Chrome”: resumen local con Gemini Nano si tu Chrome lo permite.', 'Esc para cerrar el panel.', 'Repite el tour si te pierdes.'] },
-            hub_chrome_ai: { title: 'IA local (Chrome / Gemini Nano)', what: 'Usa la API Summarizer del navegador: el modelo se descarga en tu PC y el resumen se genera en local sin API key. Requiere Chrome de escritorio reciente y requisitos de hardware.', tips: ['Si no aparece la API, activa las funciones de IA en chrome://flags y reinicia.', 'Edge puede llevar APIs similares detrás de flags; Firefox/Safari no suelen soportarlo aún.', 'No sustituye un profesor: revisa los resúmenes.'] },
+            hub_centro: { title: 'Centro Müller', what: 'Voces del sistema, ayuda, IA Chrome local; el plan del día y el resumen rápido están en Progreso.', tips: ['Configura voces antes de sesiones largas.', 'Pestaña “IA Chrome”: resumen local si tu Chrome lo permite.', 'Esc para cerrar el panel.', 'Repite el tour si te pierdes.'] },
+            hub_chrome_ai: { title: 'IA local de Chrome', what: 'Usa el resumidor integrado del navegador: el modelo se descarga en tu PC y el resumen se genera en local. Requiere Chrome de escritorio reciente y requisitos de hardware.', tips: ['Si no aparece la función, activa las opciones de IA en chrome://flags y reinicia.', 'Edge puede llevar funciones parecidas detrás de flags; Firefox/Safari no suelen soportarlo aún.', 'No sustituye un profesor: revisa los resúmenes.'] },
         };
 
         window.__MULLER_OPEN_EXERCISE_HELP = function (id) {
@@ -5426,7 +5426,7 @@ const finishPlacementWithLevel = (finalLevel) => {
                   return;
               }
               if (!('Summarizer' in self)) {
-                  setChromeAiLine('Tu navegador no expone la API Summarizer. Usa Google Chrome 138+ en escritorio con IA integrada (Gemini Nano). En Edge puede ir detrás de flags; revisa la documentación de Built-in AI.');
+                  setChromeAiLine('Tu navegador no expone el resumidor local. Usa Google Chrome 138+ en escritorio con IA integrada. En Edge puede ir detrás de flags; revisa la documentación de Built-in AI.');
                   setChromeAiOut('');
                   return;
               }
@@ -5437,7 +5437,7 @@ const finishPlacementWithLevel = (finalLevel) => {
                   const Summarizer = self.Summarizer;
                   const availability = await Summarizer.availability();
                   if (availability === 'unavailable') {
-                      setChromeAiLine('Gemini Nano no disponible en este equipo (requisitos de hardware, espacio ~22 GB libres en el perfil de Chrome, o política).');
+                      setChromeAiLine('El modelo local no está disponible en este equipo (requisitos de hardware, espacio libre en el perfil de Chrome, o política).');
                       setChromeAiBusy(false);
                       return;
                   }
@@ -7700,7 +7700,7 @@ const sentenceUtterance = playSceneAudio(audioCleanText, currentScene.speaker);
                                   <div className="space-y-3 text-xs text-gray-300">
                                       <ExerciseHelpBtn helpId="hub_chrome_ai" compact className="!border-violet-500/40" />
                                       <p className="text-[11px] leading-relaxed text-gray-400">
-                                          Esto usa la <strong className="text-white">IA integrada de Google Chrome</strong> (<strong className="text-violet-300">Gemini Nano</strong>): el modelo se <strong className="text-white">descarga en tu PC</strong> y luego puede funcionar <strong className="text-white">sin depender de nuestro servidor</strong>. No es la “galería” de Edge: Microsoft Edge puede tener APIs parecidas <strong className="text-gray-300">con flags</strong>.
+                                          Esto usa la <strong className="text-white">IA integrada de Google Chrome</strong>: el modelo se <strong className="text-white">descarga en tu PC</strong> y luego puede funcionar <strong className="text-white">sin depender de nuestro servidor</strong>. No es la “galería” de Edge: Microsoft Edge puede tener funciones parecidas <strong className="text-gray-300">con flags</strong>.
                                       </p>
                                       <p className="text-[10px] text-gray-500">
                                           Requisitos típicos: Chrome de escritorio reciente, espacio libre en disco, modelo descargable desde Chrome. Documentación:{' '}
@@ -7710,7 +7710,7 @@ const sentenceUtterance = playSceneAudio(audioCleanText, currentScene.speaker);
                                       </p>
                                       <div className="flex flex-wrap gap-2">
                                           <button type="button" onClick={fillChromeAiFromScene} className="px-3 py-2 rounded-xl bg-slate-700 hover:bg-slate-600 font-bold text-[11px] border border-white/10">Cargar escena actual (Historia)</button>
-                                          <button type="button" disabled={chromeAiBusy} onClick={runChromeLocalSummarize} className="px-3 py-2 rounded-xl bg-violet-700 hover:bg-violet-600 disabled:opacity-50 font-bold text-[11px] border border-violet-500/40">Resumir con Gemini Nano (local)</button>
+                                          <button type="button" disabled={chromeAiBusy} onClick={runChromeLocalSummarize} className="px-3 py-2 rounded-xl bg-violet-700 hover:bg-violet-600 disabled:opacity-50 font-bold text-[11px] border border-violet-500/40">Resumir con IA local</button>
                                       </div>
                                       <textarea
                                           className="w-full min-h-[100px] bg-black/50 border border-white/15 rounded-lg p-2 text-white font-mono text-[11px] outline-none focus:border-violet-500"
@@ -8386,7 +8386,7 @@ const sentenceUtterance = playSceneAudio(audioCleanText, currentScene.speaker);
                       <div className="p-4 md:p-8 max-w-7xl mx-auto w-full flex flex-col md:flex-row gap-6 md:gap-8 min-h-full animate-in fade-in">
                           <div className="flex-[2] bg-gray-800/50 p-4 md:p-6 rounded-2xl border border-gray-700 flex flex-col max-h-full overflow-y-auto hide-scrollbar">
                               <div className="bg-purple-900/30 border border-purple-500/50 p-4 md:p-5 rounded-xl mb-4 md:mb-6">
-                                  <h3 className="text-purple-300 font-bold flex items-center gap-2 mb-2 text-sm md:text-base"><Icon name="sparkles" className="w-4 h-4 md:w-5 md:h-5" /> Instrucciones para la IA (ChatGPT/Gemini)</h3>
+                                  <h3 className="text-purple-300 font-bold flex items-center gap-2 mb-2 text-sm md:text-base"><Icon name="sparkles" className="w-4 h-4 md:w-5 md:h-5" /> Instrucciones para la IA</h3>
                                   <p className="text-xs md:text-sm text-gray-300 mb-3">Copia este prompt en tu IA favorita para que te genere diálogos perfectos y compatibles con el Entrenador Müller.</p>
                                   <div className="bg-black/60 p-2 md:p-3 rounded-lg flex items-start gap-2 border border-purple-800/50 relative group">
        <p className="text-[10px] md:text-xs font-mono text-purple-200 select-all pr-6 md:pr-8">
