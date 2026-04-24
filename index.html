@@ -47,6 +47,7 @@
     <script type="text/babel" src="src/core/auth.jsx"></script>
     <script type="text/babel" src="src/core/exercise-help.jsx"></script>
     <script type="text/babel" src="src/core/storage.jsx"></script>
+    <script type="text/babel" src="src/core/speech-utils.jsx"></script>
     <script type="text/babel" src="src/features/pdf/pdf-core.jsx"></script>
     <script type="text/babel" src="src/features/escritura/telc-core.jsx"></script>
     <script type="text/babel" src="src/features/telc/telc-levels.jsx"></script>
@@ -861,7 +862,6 @@
                 }
             };
         }
-
 
         const mullerRequestMicPermission = async ({ autoPrompt = true, showToast = false } = {}) => {
             if (!navigator.mediaDevices || typeof navigator.mediaDevices.getUserMedia !== 'function') {
