@@ -44,6 +44,7 @@
     <script type="text/babel" src="src/core/helpers.jsx"></script>
     <script type="text/babel" src="src/features/pdf/pdf-core.jsx"></script>
     <script type="text/babel" src="src/features/escritura/telc-core.jsx"></script>
+    <script type="text/babel" src="src/features/lectura/reading-core.jsx"></script>
 
     <style>
         html {
@@ -1272,18 +1273,6 @@
             t = t.replace(/\s+/g, ' ').trim();
             return t;
         };
-        const mullerNormalizeGermanWordToken = (raw) => String(raw || '')
-            .toLowerCase()
-            .replace(/^[^a-zäöüß]+|[^a-zäöüß]+$/gi, '')
-            .trim();
-        const mullerReadingTokenizeText = (text) => String(text || '')
-            .split(/(\s+)/)
-            .map((chunk) => {
-                if (!chunk) return { text: '', word: '', clickable: false };
-                if (/^\s+$/.test(chunk)) return { text: chunk, word: '', clickable: false };
-                const clean = mullerNormalizeGermanWordToken(chunk);
-                return { text: chunk, word: clean, clickable: !!clean };
-            });
         const mullerRequestMicPermission = async ({ autoPrompt = true, showToast = false } = {}) => {
             if (!navigator.mediaDevices || typeof navigator.mediaDevices.getUserMedia !== 'function') {
                 if (showToast && window.__mullerToast) window.__mullerToast('Este navegador no permite pedir micrófono.', 'error');
