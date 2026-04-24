@@ -53,6 +53,7 @@
     <script type="text/babel" src="src/features/lectura/reading-core.jsx"></script>
     <script type="text/babel" src="src/features/ruta/ruta-core.jsx"></script>
     <script type="text/babel" src="src/features/vocab-lexikon/vocab-srs.jsx"></script>
+    <script type="text/babel" src="src/features/vocab-lexikon/bx-core.jsx"></script>
     <script type="text/babel" src="src/features/historia/default-guion.jsx"></script>
     <script type="text/babel" src="src/features/historia/tempus-dict.jsx"></script>
     <script type="text/babel" src="src/features/historia/oral-b1-questions.jsx"></script>
@@ -488,16 +489,6 @@
         const { useState, useEffect, useLayoutEffect, useRef, useCallback, useMemo } = React;
 
         // --- BASES DE DATOS Y CONFIGURACIÓN INICIAL (sin cambios) ---
-                const BX_DB_EMPTY = { vocabulario: [], verbos: [], preposiciones: [], conectores: [], redemittel: [] };
-        function normalizeBxPayload(data) {
-            if (!data || typeof data !== 'object') return { b1: { ...BX_DB_EMPTY }, b2: { ...BX_DB_EMPTY } };
-            const b1 = data.b1 || data.B1;
-            const b2 = data.b2 || data.B2;
-            return {
-                b1: b1 ? { ...BX_DB_EMPTY, ...b1 } : { ...BX_DB_EMPTY },
-                b2: b2 ? { ...BX_DB_EMPTY, ...b2 } : { ...BX_DB_EMPTY }
-            };
-        }
         const BX_DB_FALLBACK = normalizeBxPayload({
             b1: {
                 vocabulario: [{ b1: "Daten werden geladen …", b2: "b1-b2-database.json fehlt oder Netzwerkfehler.", es: "", trick: "Coloca b1-b2-database.json junto a index.html en el servidor." }]
