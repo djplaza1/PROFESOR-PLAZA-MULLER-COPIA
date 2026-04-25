@@ -1,5 +1,67 @@
    
-   {activeTab === 'lectura' && !practiceActive && (
+   function LecturaPanel(props) {
+  const {
+    activeTab, practiceActive,
+    readingSource, setReadingSource,
+    readingScriptId, setReadingScriptId,
+    readingTextInput, setReadingTextInput,
+    readingPasteReaderOpen, setReadingPasteReaderOpen,
+    readingPasteFromPdf, setReadingPasteFromPdf,
+    readingFontPx, setReadingFontPx,
+    readingWordInfo, setReadingWordInfo,
+    readingFocusMode, setReadingFocusMode,
+    readingSelectedSnippet, setReadingSelectedSnippet,
+    readingWordAudioBusy, setReadingWordAudioBusy,
+    readingListening, setReadingListening,
+    readingTranscript, setReadingTranscript,
+    readingScore, setReadingScore,
+    readingFeedback, setReadingFeedback,
+    readingTargetText,
+    readingScriptOptions,
+    readingProgress,
+    readingWordTokens,
+    readingVerbInfo,
+    readingSelectedWord,
+    readingSentences,
+    readingCaptureCurrentSelection,
+    readingSpeakText,
+    speakReadingWord,
+    speakReadingSentenceWithWord,
+    readingTipForWord,
+    runReadingWordLookup,
+    startReadingListen,
+    stopReadingListen,
+    finalizeReadingSession,
+    runReadingCompare,
+    readingTextSurfaceRef,
+    stopAudio, saveProgress, mergeActivityPoints,
+    clearPdfStudyTextFromReading,
+    loadPdfStudyFile,
+    pdfStudySavedDocs,
+    loadPdfStudyFromLibrary,
+    removePdfStudyFromLibrary,
+    clearPdfStudyLibrary,
+    saveCurrentPdfStudyDoc,
+    clearPdfStudyDoc,
+    pdfStudyDoc,
+    pdfStudyPageIdx, setPdfStudyPageIdx,
+    pdfStudyErr,
+    pdfStudyBusyMsg,
+    pdfStudyExtracting,
+    pdfStudyOcrBusy,
+    pdfStudyOcrBatching,
+    activePdfPageData,
+    applyPdfStudyTextToReading,
+    applyPdfStudyTextToWriting,
+    openPdfStudyFullscreen,
+    runPdfPageOcr,
+    runPdfOcrBatch,
+    pdfStudyOcrAbortRef,
+    // Añade aquí cualquier otra variable que aparezca en el JSX
+  } = props;
+  return (
+    // AQUÍ PEGAS EL JSX INTERIOR DE LECTURA, sin el condicional externo
+                 
                       <div className="flex-1 flex flex-col p-4 md:p-8 max-w-4xl mx-auto w-full animate-in fade-in duration-500 overflow-y-auto">
                           <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                               <h1 className="text-2xl md:text-4xl font-black text-sky-100 flex items-center gap-2 md:gap-3">
@@ -597,4 +659,4 @@
                       </div>
                   )}
 
-                  window.LecturaPanel = LecturaPanel;
+window.LecturaPanel = LecturaPanel;
