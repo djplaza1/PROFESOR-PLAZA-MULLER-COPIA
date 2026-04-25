@@ -57,11 +57,23 @@
     runPdfPageOcr,
     runPdfOcrBatch,
     pdfStudyOcrAbortRef,
-    // Añade aquí cualquier otra variable que aparezca en el JSX
+    pdfStudyLastApplied,
+    updatePdfStudyPageMeta,
+    runSingleSubmitAction,
+    runPdfDidacticAnalysis,
+    sendPdfDidacticToRuta,
+    sendPdfDidacticToBx,
+    sendPdfDidacticToVocab,
+    savePdfDidacticPack,
+    exportAllPdfCoachData,
+    importAllPdfCoachData,
+    pdfDidacticPackLibrary,
+    loadPdfDidacticPackFromLibrary,
+    pdfDidacticPack,
+    removePdfDidacticPackFromLibrary,
+    clearPdfDidacticPackLibrary,
   } = props;
   return (
-    // AQUÍ PEGAS EL JSX INTERIOR DE LECTURA, sin el condicional externo
-                 
                       <div className="flex-1 flex flex-col p-4 md:p-8 max-w-4xl mx-auto w-full animate-in fade-in duration-500 overflow-y-auto">
                           <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                               <h1 className="text-2xl md:text-4xl font-black text-sky-100 flex items-center gap-2 md:gap-3">
@@ -657,6 +669,7 @@
                               </div>
                           )}
                       </div>
-                  )}
+  );
+}
 
 window.LecturaPanel = LecturaPanel;
