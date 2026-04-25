@@ -162,3 +162,5 @@ function CloudPracticeFinal({ onBack, type, examCtx, setExamCtx }) {
         </div>
     );
 }
+
+window.CloudPracticeFinal = CloudPracticeFinal;
