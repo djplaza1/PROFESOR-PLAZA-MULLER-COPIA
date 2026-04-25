@@ -1615,6 +1615,11 @@ const [placementFinished, setPlacementFinished] = useState(false);
               const t = window.setTimeout(() => setSplashLogoBlink(true), 3000);
               return () => window.clearTimeout(t);
           }, [showSplash]);
+          useEffect(() => {
+              if (!showSplash) return undefined;
+              const autoClose = window.setTimeout(() => setShowSplash(false), 6500);
+              return () => window.clearTimeout(autoClose);
+          }, [showSplash]);
 
           useEffect(() => {
               const onKey = (e) => {
@@ -5431,7 +5436,7 @@ const sentenceUtterance = playSceneAudio(audioCleanText, currentScene.speaker);
             <div className={`flex flex-col muller-main-fill h-[100svh] max-h-[100svh] w-full font-sans md:rounded-xl overflow-x-hidden md:overflow-hidden shadow-2xl relative transition-colors duration-500 muller-theme-bg ${reduceMotionUi ? 'muller-reduce-motion' : ''} ${themeShellClass} ${uiTheme === 'light' ? 'text-slate-900' : 'text-white'} ${getBgColor()}`}>
 
               {showSplash && (
-                  <div className="fixed inset-0 z-[300] overflow-hidden" role="dialog" aria-modal="true" aria-label="Pantalla de inicio Profesor Plaza Müller">
+                  <div className="fixed inset-0 z-[300] overflow-hidden" role="dialog" aria-modal="true" aria-label="Pantalla de inicio Profesor Plaza Müller" onClick={() => setShowSplash(false)}>
                       <div className="absolute inset-0 flex flex-col">
                           <div className="flex-1" style={{ background: 'linear-gradient(180deg, #000000 0%, #000000 33%, #DD0000 33%, #DD0000 67%, #FFCE00 67%, #FFCE00 100%)' }} aria-hidden="true" />
                           <div className="h-[160px] md:h-[192px] bg-white border-y-2 border-black/20 shadow-[0_8px_25px_rgba(0,0,0,0.25)] flex items-stretch px-2 md:px-4">
@@ -5452,6 +5457,15 @@ const sentenceUtterance = playSceneAudio(audioCleanText, currentScene.speaker);
                                   <p className="w-full text-center text-black font-black uppercase tracking-[0.04em] whitespace-nowrap text-[clamp(1.35rem,5.4vw,4.15rem)] leading-none">
                                       PROFESOR PLAZA MÜLLER
                                   </p>
+                              </div>
+                              <div className="shrink-0 flex items-center pr-2 md:pr-3">
+                                  <button
+                                      type="button"
+                                      onClick={() => setShowSplash(false)}
+                                      className="px-3 py-2 md:px-4 md:py-2.5 rounded-xl bg-black/85 text-white border border-white/20 text-xs md:text-sm font-black hover:bg-black"
+                                  >
+                                      Entrar
+                                  </button>
                               </div>
                           </div>
                           <div className="flex-1" style={{ background: 'linear-gradient(180deg, #AA151B 0%, #AA151B 33%, #F1BF00 33%, #F1BF00 67%, #AA151B 67%, #AA151B 100%)' }} aria-hidden="true" />
