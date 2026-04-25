@@ -458,4 +458,4 @@
                       </div>
                   )}
 
-                  
+                  window.ComunidadPanel = ComunidadPanel;
