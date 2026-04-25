@@ -1,4 +1,4 @@
-       {activeTab === 'ruta' && !practiceActive && (
+               {activeTab === 'ruta' && !practiceActive && (
                       <div className="flex-1 flex flex-col overflow-y-auto hide-scrollbar p-4 md:p-8 max-w-4xl mx-auto w-full animate-in fade-in duration-500">
                           <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
                               <div>
