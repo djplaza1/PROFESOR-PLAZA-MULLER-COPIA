@@ -48,6 +48,7 @@ function EscrituraPanel(props) {
     setWritingTelcLastOcrText,
     runSingleSubmitAction,
   } = props;
+  const ExerciseHelpBtn = window.ExerciseHelpBtn || (() => null);
   return (
                       <div className="flex-1 flex flex-col p-3 md:p-6 max-w-4xl mx-auto w-full animate-in fade-in duration-500 overflow-y-auto pb-24">
                           <div className="flex flex-wrap items-center justify-between gap-2 mb-1">

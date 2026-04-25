@@ -99,6 +99,7 @@ function HistoriaPanel(props) {
     setCustomGrammarInput,
     handleCustomGrammarSave,
   } = props;
+  const ExerciseHelpBtn = window.ExerciseHelpBtn || (() => null);
   return (
                      <div className="flex-1 flex flex-col relative w-full min-h-full justify-center items-center p-3 md:p-8">
                         <div className="absolute top-2 left-2 z-[12] flex flex-col gap-2 items-start max-w-[min(100%,min(420px,96vw))]">
