@@ -1,4 +1,67 @@
-{showProfileSettingsModal && (
+function ProfileSettingsModal(props) {
+    const {
+        showProfileSettingsModal,
+        setShowProfileSettingsModal,
+        profileSettingsTab,
+        setProfileSettingsTab,
+        userStats,
+        coinsUiLabel,
+        unifiedAuth,
+        mullerMaskEmail,
+        profileNameDraft,
+        setProfileNameDraft,
+        profileNameBusy,
+        setProfileNameBusy,
+        setProfileNameMsg,
+        saveProgress,
+        setAuthTick,
+        setSupabaseProfile,
+        supabaseUser,
+        profileNameMsg,
+        mullerGetSupabaseClient,
+        mullerAccountsLoad,
+        mullerAccountsSave,
+        setSupabaseUser,
+        mullerAuthLogout,
+        setAuthPassword,
+        authMode,
+        setAuthMode,
+        authError,
+        setAuthError,
+        authEmail,
+        setAuthEmail,
+        authPassword,
+        setAuthDisplayName,
+        authDisplayName,
+        authBusy,
+        setAuthBusy,
+        mullerAuthRegister,
+        mullerAuthLogin,
+        setUiTheme,
+        uiTheme,
+        MULLER_THEME_KEY,
+        setSfxEpoch,
+        sfxEpoch,
+        noiseEnabled,
+        setNoiseEnabled,
+        MULLER_TTS_RATE_KEY,
+        setTtsPrefsEpoch,
+        setShowFloatingTools,
+        showFloatingTools,
+        setReduceMotionUi,
+        reduceMotionUi,
+        setPodcastMode,
+        podcastMode,
+        setHistoriaAudioOnly,
+        historiaAudioOnly,
+        MULLER_ONBOARDING_KEY,
+        setShowOnboarding,
+        setOnboardingNever,
+        setShowMullerHub,
+        setMullerHubTab,
+    } = props;
+    return (
+        showProfileSettingsModal && (
                   <div className="fixed inset-0 z-[140] bg-black/85 backdrop-blur-sm flex items-center justify-center p-4" onClick={() => setShowProfileSettingsModal(false)} role="presentation">
                       <div className="bg-slate-900 border border-sky-500/40 rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-hidden shadow-2xl" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-label="Perfil y ajustes">
                           <div className="flex items-center justify-between gap-2 p-4 border-b border-white/10 bg-black/35">
@@ -161,4 +224,7 @@
                           </div>
                       </div>
                   </div>
-              )}
+              )
+    );
+}
+window.ProfileSettingsModal = ProfileSettingsModal;

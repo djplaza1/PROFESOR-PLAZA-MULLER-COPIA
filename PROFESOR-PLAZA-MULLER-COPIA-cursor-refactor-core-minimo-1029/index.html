@@ -5893,6 +5893,79 @@ const sentenceUtterance = playSceneAudio(audioCleanText, currentScene.speaker);
                       </div>
                   </div>
               )}
+              {window.OnboardingModal && (
+                  <OnboardingModal
+                      showOnboarding={showOnboarding}
+                      onboardingStep={onboardingStep}
+                      finishOnboarding={finishOnboarding}
+                      onboardingNever={onboardingNever}
+                      setOnboardingNever={setOnboardingNever}
+                      setOnboardingStep={setOnboardingStep}
+                  />
+              )}
+              {window.ProfileSettingsModal && (
+                  <ProfileSettingsModal
+                      showProfileSettingsModal={showProfileSettingsModal}
+                      setShowProfileSettingsModal={setShowProfileSettingsModal}
+                      profileSettingsTab={profileSettingsTab}
+                      setProfileSettingsTab={setProfileSettingsTab}
+                      userStats={userStats}
+                      coinsUiLabel={coinsUiLabel}
+                      unifiedAuth={unifiedAuth}
+                      mullerMaskEmail={mullerMaskEmail}
+                      profileNameDraft={profileNameDraft}
+                      setProfileNameDraft={setProfileNameDraft}
+                      profileNameBusy={profileNameBusy}
+                      setProfileNameBusy={setProfileNameBusy}
+                      profileNameMsg={profileNameMsg}
+                      setProfileNameMsg={setProfileNameMsg}
+                      saveProgress={saveProgress}
+                      setAuthTick={setAuthTick}
+                      setSupabaseProfile={setSupabaseProfile}
+                      supabaseUser={supabaseUser}
+                      mullerGetSupabaseClient={mullerGetSupabaseClient}
+                      mullerAccountsLoad={mullerAccountsLoad}
+                      mullerAccountsSave={mullerAccountsSave}
+                      setSupabaseUser={setSupabaseUser}
+                      mullerAuthLogout={mullerAuthLogout}
+                      setAuthPassword={setAuthPassword}
+                      authMode={authMode}
+                      setAuthMode={setAuthMode}
+                      authError={authError}
+                      setAuthError={setAuthError}
+                      authEmail={authEmail}
+                      setAuthEmail={setAuthEmail}
+                      authPassword={authPassword}
+                      authDisplayName={authDisplayName}
+                      setAuthDisplayName={setAuthDisplayName}
+                      authBusy={authBusy}
+                      setAuthBusy={setAuthBusy}
+                      mullerAuthRegister={mullerAuthRegister}
+                      mullerAuthLogin={mullerAuthLogin}
+                      setUiTheme={setUiTheme}
+                      uiTheme={uiTheme}
+                      MULLER_THEME_KEY={MULLER_THEME_KEY}
+                      setSfxEpoch={setSfxEpoch}
+                      sfxEpoch={sfxEpoch}
+                      noiseEnabled={noiseEnabled}
+                      setNoiseEnabled={setNoiseEnabled}
+                      MULLER_TTS_RATE_KEY={MULLER_TTS_RATE_KEY}
+                      setTtsPrefsEpoch={setTtsPrefsEpoch}
+                      setShowFloatingTools={setShowFloatingTools}
+                      showFloatingTools={showFloatingTools}
+                      setReduceMotionUi={setReduceMotionUi}
+                      reduceMotionUi={reduceMotionUi}
+                      setPodcastMode={setPodcastMode}
+                      podcastMode={podcastMode}
+                      setHistoriaAudioOnly={setHistoriaAudioOnly}
+                      historiaAudioOnly={historiaAudioOnly}
+                      MULLER_ONBOARDING_KEY={MULLER_ONBOARDING_KEY}
+                      setShowOnboarding={setShowOnboarding}
+                      setOnboardingNever={setOnboardingNever}
+                      setShowMullerHub={setShowMullerHub}
+                      setMullerHubTab={setMullerHubTab}
+                  />
+              )}
 
               <nav className="muller-mobile-bottom-nav lg:hidden" aria-label="Navegacion principal movil">
                   <button type="button" onClick={() => { setActiveTab('inicio'); stopAudio(); setPracticeActive(null); }} className={activeTab === 'inicio' ? 'is-active' : ''}><Icon name="layout-dashboard" className="w-4 h-4" />Inicio</button>
@@ -7757,7 +7830,7 @@ function TelcExamHud({ examCtx, onUseTranslationHint, answered, translationVisib
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function () {
-                navigator.serviceWorker.register('./sw.js').catch(function () {});
+                navigator.serviceWorker.register('./sw.js', { updateViaCache: 'none' }).catch(function () {});
             });
         }
     </script>
