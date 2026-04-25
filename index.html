@@ -31,10 +31,7 @@
     <!-- Babel para compilar JSX en el navegador -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-    <!-- OCR manuscrito / impreso en el navegador: gratis, sin API key (Tesseract + datos de idioma de) -->
-    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
-    <!-- PDF.js (MVP PDF libros): extracción local de texto por página -->
-    <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.4.120/legacy/build/pdf.min.js"></script>
+    <!-- OCR/PDF se cargan bajo demanda para acelerar arranque -->
     
     <!-- Lucide Icons (versión fija: API estable para data-lucide + createIcons) -->
     <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
@@ -350,7 +347,7 @@
         @media (min-width: 1025px) {
             :root {
                 --muller-mobile-header-h: 8rem;
-                --muller-mobile-bottom-nav-h: 0rem;
+                --muller-mobile-bottom-nav-h: 5rem;
             }
         }
         .muller-main-fill {
@@ -581,6 +578,44 @@
 
         function mullerBxItemKey(item) {
             return (item.b1 || '') + '\u0000' + (item.b2 || '') + '\u0000' + (item.es || '');
+        }
+
+        function mullerLoadExternalScript(src, key) {
+            if (!src || !key) return Promise.reject(new Error('Script URL inválida.'));
+            try {
+                if (!window.__mullerScriptPromises) window.__mullerScriptPromises = {};
+                if (window.__mullerScriptPromises[key]) return window.__mullerScriptPromises[key];
+                window.__mullerScriptPromises[key] = new Promise((resolve, reject) => {
+                    const existing = document.querySelector(`script[data-muller-key="${key}"]`);
+                    if (existing) {
+                        existing.addEventListener('load', () => resolve(true), { once: true });
+                        existing.addEventListener('error', () => reject(new Error('No se pudo cargar ' + key)), { once: true });
+                        return;
+                    }
+                    const s = document.createElement('script');
+                    s.src = src;
+                    s.async = true;
+                    s.dataset.mullerKey = key;
+                    s.onload = () => resolve(true);
+                    s.onerror = () => reject(new Error('No se pudo cargar ' + key));
+                    document.head.appendChild(s);
+                });
+                return window.__mullerScriptPromises[key];
+            } catch (err) {
+                return Promise.reject(err);
+            }
+        }
+
+        async function mullerEnsurePdfJsLoaded() {
+            if (window.pdfjsLib && typeof window.pdfjsLib.getDocument === 'function') return true;
+            await mullerLoadExternalScript('https://cdn.jsdelivr.net/npm/pdfjs-dist@3.4.120/legacy/build/pdf.min.js', 'pdfjs');
+            return !!(window.pdfjsLib && typeof window.pdfjsLib.getDocument === 'function');
+        }
+
+        async function mullerEnsureTesseractLoaded() {
+            if (typeof window.Tesseract !== 'undefined') return true;
+            await mullerLoadExternalScript('https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js', 'tesseract');
+            return typeof window.Tesseract !== 'undefined';
         }
 
         /** Quita tarjetas de usuario cuyo Distribuir se hizo con un guion guardado concreto (id en Biblioteca). */
@@ -2270,7 +2305,8 @@ const finishPlacementWithLevel = (finalLevel) => {
 
           const loadPdfStudyFile = useCallback(async (file) => {
               if (!file) return;
-              if (!window.pdfjsLib || typeof window.pdfjsLib.getDocument !== 'function') {
+              const pdfReady = await mullerEnsurePdfJsLoaded().catch(() => false);
+              if (!pdfReady || !window.pdfjsLib || typeof window.pdfjsLib.getDocument !== 'function') {
                   setPdfStudyErr('PDF no disponible en este navegador.');
                   return;
               }
@@ -2353,11 +2389,13 @@ const finishPlacementWithLevel = (finalLevel) => {
                   setPdfStudyBusyMsg('Esta página ya tiene texto; OCR no es necesario.');
                   return;
               }
-              if (typeof Tesseract === 'undefined') {
+              const ocrReady = await mullerEnsureTesseractLoaded().catch(() => false);
+              if (!ocrReady || typeof Tesseract === 'undefined') {
                   setPdfStudyErr('No se pudo cargar OCR (Tesseract).');
                   return;
               }
-              if (!window.pdfjsLib || typeof window.pdfjsLib.getDocument !== 'function') {
+              const pdfReady = await mullerEnsurePdfJsLoaded().catch(() => false);
+              if (!pdfReady || !window.pdfjsLib || typeof window.pdfjsLib.getDocument !== 'function') {
                   setPdfStudyErr('OCR PDF no disponible en este navegador.');
                   return;
               }
@@ -3071,7 +3109,9 @@ const finishPlacementWithLevel = (finalLevel) => {
           }, []);
 
           const renderPdfOverlayPageAsync = useCallback(async (pageNum, tw, th) => {
-              if (!window.pdfjsLib || tw < 16 || th < 16) return '';
+              if (tw < 16 || th < 16) return '';
+              const pdfReady = await mullerEnsurePdfJsLoaded().catch(() => false);
+              if (!pdfReady || !window.pdfjsLib) return '';
               try {
                   window.pdfjsLib.GlobalWorkerOptions.workerSrc = MULLER_PDFJS_WORKER_URL;
                   let pdf = pdfStudyDocHandleRef.current;
@@ -4155,7 +4195,8 @@ const finishPlacementWithLevel = (finalLevel) => {
 
           const runHistoriasProOcr = async (file) => {
               if (!file) return;
-              if (typeof Tesseract === 'undefined') {
+              const ocrReady = await mullerEnsureTesseractLoaded().catch(() => false);
+              if (!ocrReady || typeof Tesseract === 'undefined') {
                   setStoriesProErr('No se pudo cargar OCR (Tesseract).');
                   return;
               }
@@ -5310,6 +5351,79 @@ const sentenceUtterance = playSceneAudio(audioCleanText, currentScene.speaker);
               };
               return h[activeTab] || '';
           }, [activeTab]);
+          const lecturaPanelProps = {
+              activeTab, practiceActive,
+              readingSource, setReadingSource,
+              readingScriptId, setReadingScriptId,
+              readingTextInput, setReadingTextInput,
+              readingPasteReaderOpen, setReadingPasteReaderOpen,
+              readingPasteFromPdf, setReadingPasteFromPdf,
+              readingFontPx, setReadingFontPx,
+              readingWordInfo, setReadingWordInfo,
+              readingFocusMode, setReadingFocusMode,
+              readingSelectedSnippet, setReadingSelectedSnippet,
+              readingWordAudioBusy, setReadingWordAudioBusy,
+              readingListening, setReadingListening,
+              readingTranscript, setReadingTranscript,
+              readingScore, setReadingScore,
+              readingFeedback, setReadingFeedback,
+              readingTargetText,
+              readingScriptOptions,
+              readingProgress,
+              readingWordTokens,
+              readingVerbInfo,
+              readingSelectedWord,
+              readingSentences,
+              readingCaptureCurrentSelection,
+              readingSpeakText,
+              speakReadingWord,
+              speakReadingSentenceWithWord,
+              readingTipForWord,
+              runReadingWordLookup,
+              startReadingListen,
+              stopReadingListen,
+              finalizeReadingSession,
+              runReadingCompare,
+              readingTextSurfaceRef,
+              stopAudio, saveProgress, mergeActivityPoints,
+              clearPdfStudyTextFromReading,
+              loadPdfStudyFile,
+              pdfStudySavedDocs,
+              loadPdfStudyFromLibrary,
+              removePdfStudyFromLibrary,
+              clearPdfStudyLibrary,
+              saveCurrentPdfStudyDoc,
+              clearPdfStudyDoc,
+              pdfStudyDoc,
+              pdfStudyPageIdx, setPdfStudyPageIdx,
+              pdfStudyErr,
+              pdfStudyBusyMsg,
+              pdfStudyExtracting,
+              pdfStudyOcrBusy,
+              pdfStudyOcrBatching,
+              activePdfPageData,
+              applyPdfStudyTextToReading,
+              applyPdfStudyTextToWriting,
+              openPdfStudyFullscreen,
+              runPdfPageOcr,
+              runPdfOcrBatch,
+              pdfStudyOcrAbortRef,
+              pdfStudyLastApplied,
+              updatePdfStudyPageMeta,
+              runSingleSubmitAction,
+              runPdfDidacticAnalysis,
+              sendPdfDidacticToRuta,
+              sendPdfDidacticToBx,
+              sendPdfDidacticToVocab,
+              savePdfDidacticPack,
+              exportAllPdfCoachData,
+              importAllPdfCoachData,
+              pdfDidacticPackLibrary,
+              loadPdfDidacticPackFromLibrary,
+              pdfDidacticPack,
+              removePdfDidacticPackFromLibrary,
+              clearPdfDidacticPackLibrary,
+          };
 
           return (
             <div className={`flex flex-col muller-main-fill h-[100svh] max-h-[100svh] w-full font-sans md:rounded-xl overflow-x-hidden md:overflow-hidden shadow-2xl relative transition-colors duration-500 muller-theme-bg ${reduceMotionUi ? 'muller-reduce-motion' : ''} ${themeShellClass} ${uiTheme === 'light' ? 'text-slate-900' : 'text-white'} ${getBgColor()}`}>
@@ -5882,7 +5996,7 @@ const sentenceUtterance = playSceneAudio(audioCleanText, currentScene.speaker);
                   </div>
               )}
 
-              <nav className="muller-mobile-bottom-nav lg:hidden" aria-label="Navegacion principal movil">
+              <nav className="muller-mobile-bottom-nav" aria-label="Navegacion principal">
                   <button type="button" onClick={() => { setActiveTab('inicio'); stopAudio(); setPracticeActive(null); }} className={activeTab === 'inicio' ? 'is-active' : ''}><Icon name="layout-dashboard" className="w-4 h-4" />Inicio</button>
                   <button type="button" onClick={() => { setActiveTab('ruta'); stopAudio(); setPracticeActive(null); }} className={activeTab === 'ruta' ? 'is-active' : ''}><Icon name="map" className="w-4 h-4" />Ruta</button>
                   <button type="button" onClick={() => { setActiveTab('historia'); setMode('dialogue'); stopAudio(); setPracticeActive(null); }} className={activeTab === 'historia' ? 'is-active' : ''}><Icon name="play" className="w-4 h-4" />Historia</button>
