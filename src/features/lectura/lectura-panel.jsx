@@ -1,5 +1,4 @@
-   function ComunidadPanel() {
-  return (
+   
    {activeTab === 'lectura' && !practiceActive && (
                       <div className="flex-1 flex flex-col p-4 md:p-8 max-w-4xl mx-auto w-full animate-in fade-in duration-500 overflow-y-auto">
                           <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
@@ -595,7 +594,7 @@
                                   ))}
                               </div>
                           )}
-                      </div>              
-  );
-}
+                      </div>
+                  )}
+
                   window.LecturaPanel = LecturaPanel;
