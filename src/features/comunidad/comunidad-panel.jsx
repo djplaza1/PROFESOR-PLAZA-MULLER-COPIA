@@ -1,4 +1,49 @@
-                {activeTab === 'comunidad' && !practiceActive && (
+function ComunidadPanel(props) {
+  const {
+    communitySubTab,
+    setCommunitySubTab,
+    unifiedAuth,
+    isCreatorAccount,
+    profileNameDraft,
+    setProfileNameDraft,
+    profileNameBusy,
+    setProfileNameBusy,
+    profileNameMsg,
+    setProfileNameMsg,
+    setSupabaseUser,
+    setSupabaseProfile,
+    saveProgress,
+    setAuthTick,
+    mullerAuthLogout,
+    setAuthPassword,
+    authMode,
+    setAuthMode,
+    authError,
+    setAuthError,
+    authEmail,
+    setAuthEmail,
+    authPassword,
+    authDisplayName,
+    setAuthDisplayName,
+    authBusy,
+    setAuthBusy,
+    userStats,
+    walletCoins,
+    rewardStatus,
+    walletLoading,
+    economyMsg,
+    setEconomyMsg,
+    setWalletCoins,
+    economyReasonText,
+    adOpenedAt,
+    setAdOpenedAt,
+    premiumStatus,
+    supabaseUser,
+    remoteProfiles,
+    directoryLocals,
+    leagueBoard,
+  } = props;
+  return (
                       <div className="flex-1 flex flex-col overflow-y-auto hide-scrollbar p-4 md:p-8 max-w-4xl mx-auto w-full animate-in fade-in duration-500">
                           <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
                               <div>
@@ -456,6 +501,6 @@
                               </div>
                           )}
                       </div>
-                  )}
-
-                  window.ComunidadPanel = ComunidadPanel;
+                  );
+}
+window.ComunidadPanel = ComunidadPanel;

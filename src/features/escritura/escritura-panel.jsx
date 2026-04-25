@@ -1,4 +1,54 @@
-          {activeTab === 'escritura' && !practiceActive && (
+function EscrituraPanel(props) {
+  const {
+    escrituraExerciseHelpId,
+    writingMode,
+    setWritingMode,
+    setWritingDictReveal,
+    setWritingCanvasKey,
+    ocrHistoryList,
+    writingCopyIdx,
+    setWritingCopyIdx,
+    writingDictSource,
+    setWritingDictSource,
+    writingDictScriptId,
+    setWritingDictScriptId,
+    writingScriptOptions,
+    writingDictationPool,
+    writingDictIdx,
+    setWritingDictIdx,
+    writingPromptIdx,
+    setWritingPromptIdx,
+    writingTelcInputMode,
+    setWritingTelcInputMode,
+    writingTelcTypedText,
+    setWritingTelcTypedText,
+    handleExerciseEnterSubmit,
+    runTelcCoachFromCurrentInput,
+    writingTelcIdx,
+    setWritingTelcIdx,
+    speakRutaDe,
+    writingTelcCoach,
+    writingLetterIdx,
+    setWritingLetterIdx,
+    guionData,
+    writingGuionWriteIdx,
+    setWritingGuionWriteIdx,
+    currentVocabList,
+    writingVocabIdx,
+    setWritingVocabIdx,
+    writingGrid,
+    setWritingGrid,
+    writingStroke,
+    setWritingStroke,
+    writingCanvasKey,
+    writingCompareTarget,
+    writingCanvasSnapshot,
+    setWritingCanvasSnapshot,
+    setOcrHistoryList,
+    setWritingTelcLastOcrText,
+    runSingleSubmitAction,
+  } = props;
+  return (
                       <div className="flex-1 flex flex-col p-3 md:p-6 max-w-4xl mx-auto w-full animate-in fade-in duration-500 overflow-y-auto pb-24">
                           <div className="flex flex-wrap items-center justify-between gap-2 mb-1">
                               <h1 className="text-2xl md:text-4xl font-black text-rose-100 flex items-center gap-2 md:gap-3">
@@ -345,6 +395,6 @@
                               }}
                           />
                       </div>
-                  )}
-
-                  
+                  );
+}
+window.EscrituraPanel = EscrituraPanel;

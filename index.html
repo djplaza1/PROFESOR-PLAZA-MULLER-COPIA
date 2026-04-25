@@ -5059,9 +5059,10 @@ const sentenceUtterance = playSceneAudio(audioCleanText, currentScene.speaker);
                     </ul>
                 </div>
                 <div class="footer">Müller · TELC · ¡Viel Erfolg beim Deutschlernen!</div>
-                <script>window.onload = function() { window.print(); }<\/script></body></html>`;
+                </body></html>`;
             printWindow.document.write(htmlContent);
             printWindow.document.close();
+            setTimeout(() => { try { printWindow.focus(); printWindow.print(); } catch (e) {} }, 150);
           };
 
           const exportProgressPDF = () => {
@@ -5073,10 +5074,11 @@ const sentenceUtterance = playSceneAudio(audioCleanText, currentScene.speaker);
                 <div><h2>🔴 Vocabulario Difícil</h2>${userStats.difficultVocab?.length ? `<table><tr><th>Alemán</th><th>Español</th></tr>${userStats.difficultVocab.map(v => `<tr><td class="diff">${v.de}</td><td>${v.es}</td></tr>`).join('')}</table>` : '<p>Vacío.</p>'}</div>
                 <div><h2>🔵 Vocabulario Normal</h2>${userStats.normalVocab?.length ? `<table><tr><th>Alemán</th><th>Español</th></tr>${userStats.normalVocab.map(v => `<tr><td class="norm">${v.de}</td><td>${v.es}</td></tr>`).join('')}</table>` : '<p>Vacío.</p>'}</div>
                 <div><h2>🧠 Reglas Gramaticales</h2>${userStats.difficultGrammar?.length ? `<table><tr><th>Regla</th><th>Ejemplo</th><th>Traducción</th></tr>${userStats.difficultGrammar.map(g => `<tr><td class="grammar-base">${g.base}</td><td><i>"${g.exampleDe}"</i></td><td>${g.exampleEs}</td></tr>`).join('')}</table>` : '<p>Vacío.</p>'}</div>
-                <script>window.onload = function() { window.print(); }<\/script></body></html>
+                </body></html>
             `;
             printWindow.document.write(htmlContent);
             printWindow.document.close();
+            setTimeout(() => { try { printWindow.focus(); printWindow.print(); } catch (e) {} }, 150);
           };
 
           // COLORES DE FONDO SUAVIZADOS (Corrección) + temas UI

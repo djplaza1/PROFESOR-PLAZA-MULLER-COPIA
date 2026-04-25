@@ -1,4 +1,22 @@
-                  {activeTab === 'inicio' && !practiceActive && (
+function InicioPanel(props) {
+    const {
+        healthSnapshot,
+        showSelfCheckPanel,
+        setShowSelfCheckPanel,
+        getSelfCheckItems,
+        vocabSrsDueCount,
+        setActiveTab,
+        setMode,
+        stopAudio,
+        setPracticeActive,
+        setVocabDueFilterOnly,
+        setBxBankLevel,
+        setBxCategory,
+        setShowMullerHub,
+        setMullerHubTab,
+        setTourStep,
+    } = props;
+    return (
                       <div className="flex-1 flex flex-col overflow-y-auto hide-scrollbar p-4 md:p-8 max-w-5xl mx-auto w-full animate-in fade-in duration-500">
                           <div className="mb-6 md:mb-8">
                               <h1 className="text-3xl md:text-5xl font-black text-white flex items-center gap-3 mb-2"><Icon name="layout-dashboard" className="w-10 h-10 md:w-14 md:h-14 text-indigo-400" /> Inicio</h1>
@@ -82,7 +100,8 @@
                               <button type="button" onClick={() => { setShowMullerHub(true); setMullerHubTab('voices'); }} className="px-4 py-2.5 rounded-xl bg-sky-700 hover:bg-sky-600 font-bold text-sm border border-sky-500/40 shadow-lg">Centro Müller (voces · temas · IA Chrome)</button>
                               <button type="button" onClick={() => setTourStep(1)} className="px-4 py-2.5 rounded-xl bg-indigo-800 hover:bg-indigo-700 font-bold text-sm border border-indigo-500/40 shadow-lg">Tour guiado (5 pasos)</button>
                           </div>
-                      </div>
-                  )}
+                  </div>
+    );
+}
 
-  
+window.InicioPanel = InicioPanel;

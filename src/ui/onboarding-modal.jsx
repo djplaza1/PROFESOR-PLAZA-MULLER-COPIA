@@ -1,4 +1,14 @@
-        {showOnboarding && onboardingStep >= 1 && onboardingStep <= 5 && (() => {
+function OnboardingModal(props) {
+    const {
+        showOnboarding,
+        onboardingStep,
+        finishOnboarding,
+        onboardingNever,
+        setOnboardingNever,
+        setOnboardingStep,
+    } = props;
+    return (
+        showOnboarding && onboardingStep >= 1 && onboardingStep <= 5 && (() => {
                   const obSteps = [
                       { t: 'Bienvenida', d: 'Müller funciona en el navegador: Historia (audio), Vocab con SRS, Escritura con OCR local, B1/B2 y Progreso. Todo gratis en este dispositivo.' },
                       { t: 'Pestañas', d: 'Arriba cambias de actividad. La pestaña Entrenamiento abre artículos, verbos y preposiciones con simulacro. El panel azul es el Centro Müller (voces, plan, ayuda).' },
@@ -24,4 +34,7 @@
                       </div>
                   </div>
                   );
-              })()}
+              })()
+    );
+}
+window.OnboardingModal = OnboardingModal;
