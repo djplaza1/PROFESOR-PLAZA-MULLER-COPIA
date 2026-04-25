@@ -1,5 +1,5 @@
 /* Müller — Service Worker: red primero; caché de app + metadatos offline (último guion vía Cache API) */
-const CACHE = 'muller-sw-v4';
+const CACHE = 'muller-sw-v5';
 const PRECACHE_URLS = [
     './',
     './index.html',
@@ -52,6 +52,24 @@ self.addEventListener('fetch', (event) => {
                 .then((res) => {
                     const copy = res.clone();
                     if (res.ok) caches.open(CACHE).then((c) => c.put(req, copy));
+                    return res;
+                })
+                .catch(() => caches.match(req))
+        );
+        return;
+    }
+    // Scripts JSX/JS y estilos: red primero para evitar servir código viejo tras refactors.
+    if (
+        url.origin === self.location.origin &&
+        (url.pathname.endsWith('.jsx') || url.pathname.endsWith('.js') || url.pathname.endsWith('.css'))
+    ) {
+        event.respondWith(
+            fetch(req)
+                .then((res) => {
+                    if (res && res.ok) {
+                        const copy = res.clone();
+                        caches.open(CACHE).then((c) => c.put(req, copy));
+                    }
                     return res;
                 })
                 .catch(() => caches.match(req))
